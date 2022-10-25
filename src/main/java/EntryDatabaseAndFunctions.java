@@ -1,60 +1,72 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class EntryDatabaseAndFunctions extends Entry {
-    static Scanner scanner = new Scanner(System.in);
-    private static ArrayList<Entry> entries = new ArrayList<>();
-    ObjectMapper mapper = new ObjectMapper();
+    private static final Scanner scanner = new Scanner(System.in);
 
-    static void HomeScreen () {
-        String choice = "0";
-        System.out.println("Welcome to your diary!");
-        System.out.println("Please choose an action:");
-        System.out.println("1 - Add an entry");
-        System.out.println("2 - Search for entries");
-        System.out.println("3 - Exit Diary");
-        choice = scanner.nextLine();
-        switch (choice) {
-            case "1":
-                addEntry();
-                break;
-            case "2":
-                showEntries();
-                break;
-            case "3":
-                System.out.println("Press any key to quit the program...");
-                break;
-            default:
-                System.out.println("Error. Press any key to choose another action.");
-                break;
+    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final Path pathToJSONFile = Paths.get("src/main/resources/EntryList.json");
+    private static List<Entry> entriesFromJSON;
+
+    static {
+        try {
+            entriesFromJSON = List.of(mapper.readValue(pathToJSONFile.toFile(), Entry[].class));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    static void addEntry() {
+    private static void homeScreen() {
+        System.out.println("Please choose an action:");
+        System.out.println("1. Add an entry");
+        System.out.println("2. Search for entries");
+        System.out.println("9. Exit Diary");
+    }
+
+    private static Entry addEntry() {
         System.out.println("Please enter the title for your entry -");
-        String titleScanner = scanner.nextLine();
+        String title = scanner.nextLine();
 
         System.out.println("Please enter the text for your entry  -");
-        String textScanner = scanner.nextLine();
+        String text = scanner.nextLine();
 
-        DateFormat entryDate = new SimpleDateFormat("dd-MM-yyyy");
-        Date formatDate = new Date();
-        String date = entryDate.format(formatDate);
+        String date = LocalDate.now().toString();
 
-        System.out.println("-----Your Entry-----" + "\n");
-        System.out.println("---Title--- " + "\n" + titleScanner + "\n" );
-        System.out.println("---Text---" + "\n" + textScanner + "\n");
-        System.out.println("---Date---" + "\n" + date);
+        System.out.println("----------------------" + "\n");
+        System.out.println("------Your Entry------" + "\n");
+        System.out.println("---Title--- " + "\n" + title + "\n" );
+        System.out.println("---Text---" + "\n" + text + "\n");
+        System.out.println("---Date---" + "\n" + date + "\n");
+        System.out.println("----------------------" + "\n");
+
+
+        return new Entry(title, text, date);
+    }
+
+    public static void createAndSaveEntryToJSON() throws IOException {
+        entriesFromJSON = List.of(mapper.readValue(pathToJSONFile.toFile(), Entry[].class));
+        List<Entry> entries = new ArrayList<>(entriesFromJSON);
+        entries.add(addEntry());
+        mapper.writeValue(pathToJSONFile.toFile(), entries);
+    }
+
+    public static int fetchInput() {
+        homeScreen();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     static void showEntries() {
-        for (Entry entry : entries) {
+        for (Entry entry : entriesFromJSON) {
         }
+    }
+    static void welcomeMessage() {
+        System.out.println("Welcome to your digital diary!");
     }
 }

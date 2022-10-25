@@ -1,14 +1,12 @@
-import java.time.LocalDateTime;
-
 public class Entry {
     private String title;
     private String text;
-    private LocalDateTime dateTime;
+    private String date;
 
-    public Entry(String title, String text, LocalDateTime dateTime) {
+    public Entry(String title, String text, String date) {
         this.title = title;
         this.text = text;
-        this.dateTime = dateTime;
+        this.date = date;
     }
 
     public Entry() {
@@ -30,11 +28,11 @@ public class Entry {
         this.text = text;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public String getDate() {
+        return date;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
+    public void setDate(String date) {
+        this.date = date;
     }
 }
