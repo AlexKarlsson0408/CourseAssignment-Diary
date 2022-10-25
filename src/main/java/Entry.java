@@ -1,22 +1,17 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Entry {
     private String title;
     private String text;
-    private LocalDate date;
+    private LocalDateTime dateTime;
 
-    public Entry(String title, String text, LocalDate date) {
+    public Entry(String title, String text, LocalDateTime dateTime) {
         this.title = title;
         this.text = text;
-        this.date = date;
+        this.dateTime = dateTime;
     }
 
     public Entry() {
-    }
-
-    @Override
-    public String toString() {
-        return date + "\n" + title + "\n" + text;
     }
 
     public String getTitle() {
@@ -35,11 +30,11 @@ public class Entry {
         this.text = text;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }
