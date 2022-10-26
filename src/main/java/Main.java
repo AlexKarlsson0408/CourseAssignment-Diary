@@ -8,7 +8,7 @@ public class Main {
 
         int choice = 0;
 
-        while(choice != 9) {
+        while (choice != 9) {
             choice = EntryDatabaseAndFunctions.fetchInput();
             switch (choice) {
                 case 1:

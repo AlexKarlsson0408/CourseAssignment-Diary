@@ -68,7 +68,7 @@ public class EntryDatabaseAndFunctions extends Entry {
         try {
             for (Entry entry : entriesFromJSONUpdated) {
                 entryTemplate(entry);
-        }
+            }
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("Something went wrong! Please try another action.");
