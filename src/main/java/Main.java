@@ -14,6 +14,8 @@ public class Main {
                 case 1:
                     EntryDatabaseAndFunctions.createAndSaveEntryToJSON();
                     break;
+                case 2:
+                    EntryDatabaseAndFunctions.showEntries();
             }
         }
     }

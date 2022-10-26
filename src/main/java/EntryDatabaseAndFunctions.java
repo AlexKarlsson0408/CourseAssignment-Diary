@@ -62,10 +62,25 @@ public class EntryDatabaseAndFunctions extends Entry {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    static void showEntries() {
-        for (Entry entry : entriesFromJSON) {
+    public static void showEntries() throws IOException {
+        List<Entry> entriesFromJSONUpdated = List.of(mapper.readValue(pathToJSONFile.toFile(), Entry[].class));
+        System.out.println("-----Your Entries-----" + "\n");
+        for (Entry entry : entriesFromJSONUpdated) {
+            entryTemplate(entry);
         }
     }
+
+    private static void entryTemplate(Entry entry) {
+        System.out.println("----------------------");
+        System.out.println("---Title---" + "\n" + entry.getTitle());
+        System.out.println("---Text---" + "\n" + entry.getText());
+        System.out.println("---Date---" + "\n" + entry.getDate());
+        System.out.println("----------------------" + "\n");
+    }
+
+
+
+
     static void welcomeMessage() {
         System.out.println("Welcome to your digital diary!");
     }
