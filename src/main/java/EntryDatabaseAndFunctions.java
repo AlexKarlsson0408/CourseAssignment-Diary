@@ -41,7 +41,7 @@ public class EntryDatabaseAndFunctions extends Entry {
 
         System.out.println("----------------------" + "\n");
         System.out.println("------Your Entry------" + "\n");
-        System.out.println("---Title--- " + "\n" + title + "\n" );
+        System.out.println("---Title--- " + "\n" + title + "\n");
         System.out.println("---Text---" + "\n" + text + "\n");
         System.out.println("---Date---" + "\n" + date + "\n");
         System.out.println("----------------------" + "\n");
@@ -65,21 +65,23 @@ public class EntryDatabaseAndFunctions extends Entry {
     public static void showEntries() throws IOException {
         List<Entry> entriesFromJSONUpdated = List.of(mapper.readValue(pathToJSONFile.toFile(), Entry[].class));
         System.out.println("-----Your Entries-----" + "\n");
-        for (Entry entry : entriesFromJSONUpdated) {
-            entryTemplate(entry);
+        try {
+            for (Entry entry : entriesFromJSONUpdated) {
+                entryTemplate(entry);
+        }
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("Something went wrong! Please try another action.");
         }
     }
 
     private static void entryTemplate(Entry entry) {
         System.out.println("----------------------");
-        System.out.println("---Title---" + "\n" + entry.getTitle());
-        System.out.println("---Text---" + "\n" + entry.getText());
-        System.out.println("---Date---" + "\n" + entry.getDate());
+        System.out.println("---Title---" + "\n" + entry.getTitle() + "\n");
+        System.out.println("---Text---" + "\n" + entry.getText() + "\n");
+        System.out.println("---Date---" + "\n" + entry.getDate() + "\n");
         System.out.println("----------------------" + "\n");
     }
-
-
-
 
     static void welcomeMessage() {
         System.out.println("Welcome to your digital diary!");
