@@ -18,5 +18,6 @@ public class Main {
                     EntryDatabaseAndFunctions.showEntries();
             }
         }
+        EntryDatabaseAndFunctions.goodbyeMessage();
     }
 }

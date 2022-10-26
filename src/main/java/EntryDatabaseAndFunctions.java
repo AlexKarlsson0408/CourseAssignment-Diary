@@ -39,7 +39,7 @@ public class EntryDatabaseAndFunctions extends Entry {
 
         String date = LocalDate.now().toString();
 
-        System.out.println("----------------------" + "\n");
+        System.out.println("----------------------");
         System.out.println("------Your Entry------" + "\n");
         System.out.println("---Title--- " + "\n" + title + "\n");
         System.out.println("---Text---" + "\n" + text + "\n");
@@ -85,5 +85,9 @@ public class EntryDatabaseAndFunctions extends Entry {
 
     static void welcomeMessage() {
         System.out.println("Welcome to your digital diary!");
+    }
+
+    static void goodbyeMessage() {
+        System.out.println("Good bye and have a nice day!");
     }
 }
